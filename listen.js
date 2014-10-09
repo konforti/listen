@@ -1,6 +1,6 @@
 (function () {
   var
-      name = "listentome",
+      name = "listen-node",
       els = document.getElementsByClassName( name ),
       a, b, c;
 
@@ -45,7 +45,7 @@
   }
 
   document.addEventListener( 'click', function ( e ) {
-    var a;
+    var a, b, c;
     if ( e.target.className === name ) {
       a = e.target.children[1];
       b = e.target;
@@ -57,13 +57,13 @@
       c = e.target;
     }
 
-    var
-        start = parseInt( b.getAttribute( 'data-start' ) ) || 0,
-        end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
+
+    a.start = parseInt( b.getAttribute( 'data-start' ) ) || 0,
+    a.end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
 
     if ( a && a.getAttribute( "data-playing" ) === "false" ) {
-      if ( start > a.currentTime || end < a.currentTime ) {
-        a.currentTime = start;
+      if ( a.start > a.currentTime || a.end < a.currentTime ) {
+        a.currentTime = a.start;
       }
       lPlay( a, c );
     }
@@ -71,27 +71,21 @@
       lPause( a, c );
     }
 
-//    a.addEventListener( 'timeupdate', function () {
-//      var percent = (((a.currentTime - start) * 100) / (end - start));
-//      percent = percent < 100 ? percent : 100;
-//      b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.15)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
-//
-//      if ( end < a.currentTime ) {
-//        lPause( a, c );
-//      }
-//    } );
+    a.addEventListener( 'playing', function () {
 
+    });
     (function loop() {
       var d = requestAnimationFrame( loop );
-      var percent = (((a.currentTime - start) * 100) / (end - start));
+      var percent = (((a.currentTime - a.start) * 100) / (a.end - a.start));
       percent = percent < 100 ? percent : 100;
       b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.15)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
 
-      if ( end < a.currentTime ) {
+      if ( a.end < a.currentTime ) {
         lPause( a, c );
         cancelAnimationFrame( d );
       }
     })();
+
   } );
 })();
 
