@@ -1,17 +1,17 @@
 (function () {
+  var
+      name = "listen-node",
+      basePath = "http://konforti.net/listen/",
+      els = document.getElementsByClassName( name ),
+      a, b, c;
 
   var css=document.createElement("link");
   css.setAttribute("rel", "stylesheet");
   css.setAttribute("type", "text/css");
-  css.setAttribute("href", "file:///home/raz/www/listen/listen.css");
+  css.setAttribute("href", basePath);
   if (typeof css!="undefined"){
     document.getElementsByTagName("head")[0].appendChild(css)
   }
-
-  var
-      name = "listen-node",
-      els = document.getElementsByClassName( name ),
-      a, b, c;
 
   for ( var i = 0; b = els[i]; ++i ) {
     a = document.createElement( 'audio' );
@@ -21,18 +21,6 @@
     a.setAttribute( "data-playing", "false" );
 
     b.id = name + "-" + i;
-//    b.style.display = "inline-block";
-//    b.style.background = "rgba(0, 0, 0, 0.05)";
-//    b.style.padding = "1px 5px";
-//    b.style.borderRadius = "4px";
-//    b.style.cursor = "pointer";
-
-//    c.style.fontSize = "0.7em";
-//    c.style.border = "0.5em solid transparent";
-//    c.style.borderLeft = "0.75em solid";
-//    c.style.display = "inline-block";
-//    c.style.marginLeft = "5px";
-
     b.insertBefore( c, b.firstChild );
     b.appendChild( a );
   }
@@ -41,19 +29,12 @@
     a.play();
     a.setAttribute( "data-playing", "true" );
     c.classList.add("playing");
-//    c.style.border = 0;
-//    c.style.borderLeft = "0.75em double";
-//    c.style.borderRight = "0.5em solid transparent";
-//    c.style.height = "1em";
   }
 
   function lPause( a, c ) {
     a.pause();
     a.setAttribute( "data-playing", "false" );
     c.classList.remove("playing");
-//    c.style.border = '0.5em solid transparent';
-//    c.style.borderLeft = '0.75em solid';
-//    c.style.height = "auto";
   }
 
   document.addEventListener( 'click', function ( e ) {
