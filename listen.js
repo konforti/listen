@@ -57,35 +57,35 @@
       c = e.target;
     }
 
+    if (a && b && c) {
+      a.start = parseInt( b.getAttribute( 'data-start' ) ) || 0,
+          a.end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
 
-    a.start = parseInt( b.getAttribute( 'data-start' ) ) || 0,
-    a.end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
-
-    if ( a && a.getAttribute( "data-playing" ) === "false" ) {
-      if ( a.start > a.currentTime || a.end < a.currentTime ) {
-        a.currentTime = a.start;
+      if ( a && a.getAttribute( "data-playing" ) === "false" ) {
+        if ( a.start > a.currentTime || a.end < a.currentTime ) {
+          a.currentTime = a.start;
+        }
+        lPlay( a, c );
       }
-      lPlay( a, c );
-    }
-    else {
-      lPause( a, c );
-    }
-
-    a.addEventListener( 'playing', function () {
-
-    });
-    (function loop() {
-      var d = requestAnimationFrame( loop );
-      var percent = (((a.currentTime - a.start) * 100) / (a.end - a.start));
-      percent = percent < 100 ? percent : 100;
-      b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.15)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
-
-      if ( a.end < a.currentTime ) {
+      else {
         lPause( a, c );
-        cancelAnimationFrame( d );
       }
-    })();
 
+      a.addEventListener( 'playing', function () {
+
+      });
+      (function loop() {
+        var d = requestAnimationFrame( loop );
+        var percent = (((a.currentTime - a.start) * 100) / (a.end - a.start));
+        percent = percent < 100 ? percent : 100;
+        b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.15)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
+
+        if ( a.end < a.currentTime ) {
+          lPause( a, c );
+          cancelAnimationFrame( d );
+        }
+      })();
+    }
   } );
 })();
 
