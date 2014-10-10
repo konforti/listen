@@ -22,6 +22,7 @@
     c.style.border = '0.5em solid transparent';
     c.style.borderLeft = '0.75em solid';
     c.style.display = "inline-block";
+    c.style.marginLeft = "5px";
 
     b.insertBefore( c, b.firstChild );
     b.appendChild( a );
@@ -51,7 +52,7 @@
       b = e.target;
       c = e.target.children[0];
     }
-    else if ( e.target.parentElement.className === name ) {
+    else if ( e.target.parentElement && e.target.parentElement.className === name ) {
       a = e.target.parentElement.children[1];
       b = e.target.parentElement;
       c = e.target;
