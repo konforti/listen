@@ -1,5 +1,6 @@
 (function() {
   var embedScript = '<script>(function(d,s,id){var js, fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="http://konforti.net/listen/listen.js";fjs.parentNode.insertBefore(js,fjs);})(document,"script","listen-embed");';
+//  var embedScript = '<script async src="http://konforti.net/listen/listen.js"></script>';
 
 // Update embed code.
   var embedCode = function () {

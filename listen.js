@@ -1,17 +1,15 @@
 (function () {
+  "use strict";
+
   var
       name = "listen-node",
-      basePath = "http://konforti.net/listen/",
       els = document.getElementsByClassName( name ),
       a, b, c;
 
-  var css=document.createElement("link");
-  css.setAttribute("rel", "stylesheet");
-  css.setAttribute("type", "text/css");
-  css.setAttribute("href", basePath + "listen.css");
-  if (typeof css!="undefined"){
-    document.getElementsByTagName("head")[0].appendChild(css)
-  }
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".listen-node {display: inline-block; background:rgba(0, 0, 0, 0.05); padding: 1px 5px; border-radius:4px; cursor: pointer;} .listen-node i {font-size: 0.7em; border: 0.5em solid transparent; border-left: 0.75em solid; display: inline-block; margin-left: 5px;} .listen-node .playing { border: 0; border-left: 0.75em double; border-right: 0.5em solid transparent; height: 1em;}";
+  document.getElementsByTagName("head")[0].appendChild(css);
 
   for ( var i = 0; b = els[i]; ++i ) {
     a = document.createElement( 'audio' );
@@ -25,13 +23,13 @@
     b.appendChild( a );
   }
 
-  function lPlay( a, c ) {
+  function _play( a, c ) {
     a.play();
     a.setAttribute( "data-playing", "true" );
     c.classList.add("playing");
   }
 
-  function lPause( a, c ) {
+  function _pause( a, c ) {
     a.pause();
     a.setAttribute( "data-playing", "false" );
     c.classList.remove("playing");
@@ -51,30 +49,27 @@
     }
 
     if (a && b && c) {
-      a.start = parseInt( b.getAttribute( 'data-start' ) ) || 0,
-          a.end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
+      a.srt = parseInt( b.getAttribute( 'data-start' ) ) || 0;
+      a.end = parseInt( b.getAttribute( 'data-end' ) ) || a.duration;
 
       if ( a && a.getAttribute( "data-playing" ) === "false" ) {
-        if ( a.start > a.currentTime || a.end < a.currentTime ) {
-          a.currentTime = a.start;
+        if ( a.srt > a.currentTime || a.end < a.currentTime ) {
+          a.currentTime = a.srt;
         }
-        lPlay( a, c );
+        _play( a, c );
       }
       else {
-        lPause( a, c );
+        _pause( a, c );
       }
 
-      a.addEventListener( 'playing', function () {
-
-      });
       (function loop() {
         var d = requestAnimationFrame( loop );
-        var percent = (((a.currentTime - a.start) * 100) / (a.end - a.start));
+        var percent = (((a.currentTime - a.srt) * 100) / (a.end - a.srt));
         percent = percent < 100 ? percent : 100;
         b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.1)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
 
         if ( a.end < a.currentTime ) {
-          lPause( a, c );
+          _pause( a, c );
           cancelAnimationFrame( d );
         }
       })();
