@@ -13,7 +13,7 @@
 
     b.id = name + "-" + i;
     b.style.display = "inline-block";
-    b.style.background = "#eee";
+    b.style.background = "rgba(0, 0, 0, 0.05)";
     b.style.padding = "1px 5px";
     b.style.borderRadius = "4px";
     b.style.cursor = "pointer";
@@ -79,7 +79,7 @@
         var d = requestAnimationFrame( loop );
         var percent = (((a.currentTime - a.start) * 100) / (a.end - a.start));
         percent = percent < 100 ? percent : 100;
-        b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.15)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
+        b.style.background = "linear-gradient(to right, rgba(0, 0, 0, 0.1)" + percent + "%, rgba(0, 0, 0, 0.05)" + percent + "%)";
 
         if ( a.end < a.currentTime ) {
           lPause( a, c );
