@@ -1,12 +1,11 @@
 listen
 ======
-
 Inline Audio Player
 
-** Demo
+## Demo
 http://www.konforti.net/listen/examples/
 
-** Usage
+## Usage
 ```html
 <!DOCTYPE html>
 <html>
